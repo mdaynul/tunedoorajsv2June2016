@@ -1,0 +1,230 @@
+<style>
+    .spinner {
+        display: inline-block;
+        opacity: 0;
+        width: 0;
+
+        -webkit-transition: opacity 0.25s, width 0.25s;
+        -moz-transition: opacity 0.25s, width 0.25s;
+        -o-transition: opacity 0.25s, width 0.25s;
+        transition: opacity 0.25s, width 0.25s;
+    }
+
+    .has-spinner.active {
+        cursor:progress;
+    }
+
+    .has-spinner.active .spinner {
+        opacity: 1;
+        width: auto; /* This doesn't work, just fix for unkown width elements */
+    }
+
+    .has-spinner.btn-mini.active .spinner {
+        width: 10px;
+    }
+
+    .has-spinner.btn-small.active .spinner {
+        width: 13px;
+    }
+
+    .has-spinner.btn.active .spinner {
+        width: 16px;
+    }
+
+    .has-spinner.btn-large.active .spinner {
+        width: 19px;
+    }
+</style>
+
+<div class="panel panel-default" ng-show="!modalCtrl.shouldDisplayResult">
+    <div class="panel-heading">
+        <h3 class="panel-title">Set Active Service</h3>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Select Payment Instrument
+                    <span ng-show="!modalCtrl.isPaymentMethodReady" class="has-spinner active">
+                    <span class="spinner"><i class="glyphicon glyphicon-refresh"></i>Loading...</span>
+                </span>
+                </h3>
+
+            </div>
+            <div class="panel-body">
+                <form>
+                    <braintree-dropin options="modalCtrl.dropinOptions"></braintree-dropin>
+                    <input type="submit" value="Purchase Now" ng-show="!modalCtrl.paymentInitiated() && modalCtrl.isPaymentMethodReady" />
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-warning" ng-show="modalCtrl.paymentInitiated()">
+            <div class="panel-heading">
+                <h3 class="panel-title">Confirm Purchase</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="col-md-6">Song details</th>
+                        <th class="col-md-6">Service details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{modalCtrl.song.title}}</td>
+                        <td>
+                            <table class="table table-bordered">
+                                <tr ng-repeat="service in modalCtrl.selectedServices">
+                                    <td class="col-md-2">{{service.serviceName}}</td>
+                                    <td class="col-md-1"><span class="pull-right">{{ service.suggestedCost }}{{ service.currency }}</span></td>
+                                </tr>
+                                <tr class="danger">
+                                    <td class="col-md-2">Total</td>
+                                    <td class="col-md-1"><span class="pull-right">{{modalCtrl.getTotalAmount()}}{{modalCtrl.getCurrency()}}</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <div class="center-block"><!--doesnt work-->
+                    <button class="btn btn-danger" ng-click="modalCtrl.payButtonClicked()">Yes I Confirm Purchase!!</button>
+                    <button class="btn btn-default" ng-click="modalCtrl.reset()">Reset</button>
+                    <button class="btn btn-default" ng-click="modalCtrl.cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-danger" ng-show="modalCtrl.isError">
+            <div class="panel-heading">
+                <h3 class="panel-title">ERROR!!</h3>
+            </div>
+            <div class="panel-body">
+                <div>{{modalCtrl.errors.error}}</div>
+                <div ng-if="!modalCtrl.errors.error">{{modalCtrl.errors.message}}</div>
+                <button class="btn btn-default" ng-click="modalCtrl.cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-success" ng-show="modalCtrl.success && modalCtrl.shouldDisplayResult">
+    <div class="panel-heading">
+        <h3 class="panel-title">Success</h3>
+    </div>
+    <div class="panel-body" id="invoicePrintSection">
+        <div ng-if="modalCtrl.success.invoice" bind-html-compile="modalCtrl.success.invoice"></div>
+
+        <div class="col-md-12" ng-if="!modalCtrl.success.invoice">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                Payment Settled {{modalCtrl.success.amount}} {{modalCtrl.success.currencyIsoCode}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="/images/tunedoor_logo_y.png" class="logo_img" alt="Tunedoor"/>
+            </div>
+            <!--<div class="col-md-2"></div>-->
+            <div class="col-md-6 col-md-offset-2">
+                <strong>Receipt</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div>Bill To</div>
+                <div ng-if="modalCtrl.success.paymentInstrumentType==='credit_card'">
+                    <div>{{modalCtrl.success.creditCard.cardholderName}}</div>
+                    <div>
+                        <span>{{modalCtrl.success.creditCard.cardType}}</span>
+                        <span>{{modalCtrl.success.creditCard.maskedNumber}}</span>
+                        <span><img ng-src="{{modalCtrl.success.creditCard.imageUrl}}" class="img-responsive" alt="Tunedoor Payment"></span>
+                    </div>
+                </div>
+                <div ng-if="modalCtrl.success.paymentInstrumentType==='paypal_account'">
+                    <img ng-src="{{modalCtrl.success.payPalDetails.imageUrl}}" class="img-responsive" alt="Responsive image">
+                    <div>{{modalCtrl.success.payPalDetails.payerFirstName}} {{modalCtrl.payPalDetails.payerLastName}}</div>
+                    <div>{{modalCtrl.success.payPalDetails.payerEmail}}</div>
+                    <div>{{modalCtrl.success.payPalDetails.paymentId}}</div>
+                </div>
+            </div>
+            <div class="col-md-5 col-md-offset-2">
+                <div>
+                    <div>Payment</div>
+                    <div>{{ modalCtrl.success.createdAt | date : "MMMM dd, yyyy HH:mm Z" }}</div>
+                </div>
+                <div>
+                    <div>Transaction ID</div>
+                    <div>{{ modalCtrl.success.id }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">Purchased Service</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-md-6">Song details</th>
+                <th class="col-md-6">Service details</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{modalCtrl.song.title}}</td>
+                    <td>
+                        <table class="table table-bordered">
+                            <tr ng-repeat="service in modalCtrl.selectedServices">
+                                <td class="col-md-2">{{service.serviceName}}</td>
+                                <td class="col-md-1"><span class="pull-right">{{ service.suggestedCost }}{{ service.currency }}</span></td>
+                            </tr>
+                            <tr class="danger">
+                                <td class="col-md-2">Total</td>
+                                <td class="col-md-1"><span class="pull-right">{{modalCtrl.getTotalAmount()}}{{modalCtrl.getCurrency()}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="panel panel-footer">
+        <div class="row">
+            <a href="/invoice/download" class="btn btn-default col-md-6">
+                <i class="glyphicon glyphicon-download"></i>
+                <span>Download</span>
+            </a>
+            <button class="btn btn-default col-md-6" ng-click="modalCtrl.sendEmail()">
+                <i class="glyphicon glyphicon-print"></i>
+                <span>Email</span>
+            </button>
+            <!--ng-print print-element-id="printThisElement"-->
+            <button class="btn btn-default col-md-6" ng-print print-element-id="invoicePrintSection">
+                <i class="glyphicon glyphicon-share"></i>
+                <span>Print</span>
+            </button>
+            <div class="col-md-6">
+                <i class="glyphicon glyphicon-share"></i>
+                <!--<span>Share</span>-->
+                <span>
+                    <a facebook-feed-share class="facebookShare" data-url='http://www.tunedoor.com/'
+                       data-shares='shares'
+                       data-caption='Purchase brand new musics'
+                       data-picture='http://www.tunedoor.com/wp-content/uploads/2015/03/2.jpg'
+                       data-description="Example text">{{ shares }}</a>
+                    <a twitter data-count='horizontal' data-url='http://www.tunedoor.com/'
+                       data-size="medium" data-text='Purchase brand new musics'></a>
+                    <a gplus data-size="tall" data-annotation="bubble" data-href='{{url}}' data-action='share'></a>
+                </span>
+            </div>
+        </div>
+        <!--Trasaction ID = id >> kg58rx-->
+        <button class="btn btn-default" ng-click="modalCtrl.cancel()">Done!</button>
+
+    </div>
+</div>

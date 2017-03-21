@@ -1,0 +1,410 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
+    display: block
+}
+
+body {
+    display: flex;
+    color: #2a2b2c;
+    background: #facb03;
+    font-family: Open Sans, Arial, Helvetica, Verdana, sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 1.7em;
+    overflow: hidden;
+}
+
+body, html {
+    min-height: 600px;
+}
+
+a:link {
+
+}
+
+a, a:active, a:visited, .footer_widget .widget_links ul li a {
+    color: #111;
+}
+
+a, a:active, a:visited, .leftContentSP .thumbnails img {
+    transition: all 0.25s ease-in-out 0s;
+}
+
+a {
+    background: none repeat scroll 0 0 transparent;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+
+input[type="text"], input[type="password"], input[type="email"], select, textarea {
+    font-size: 16px;
+    padding: 10px 5%;
+    width: 90%;
+}
+
+input[type="submit"] {
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 8px 20px;
+}
+
+pre, code, kbd, samp {
+    background: none repeat scroll 0 0 #2c2e32;
+    color: #fff;
+    font-family: Open Sans, monospace, sans-serif;
+    font-size: 12px;
+    height: auto;
+    overflow: scroll;
+    padding: 5px 15px;
+    width: 100%;
+}
+
+body, select, textarea {
+    color: #2a2b2c;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Open Sans, sans-serif;
+    font-weight: normal;
+    line-height: 110%;
+    color: #212121;
+    margin: 10px 0px 15px
+}
+
+h1 {
+    font-size: 26px
+}
+
+h2 {
+    font-size: 22px
+}
+
+h3 {
+    font-size: 20px
+}
+
+h4 {
+    font-size: 18px
+}
+
+h5 {
+    font-size: 16px
+}
+
+h6 {
+    font-size: 14px
+}
+
+html {
+    overflow-y: scroll
+}
+
+a:hover, a:active {
+    outline: none
+}
+
+ul, ol {
+    margin-left: 2em
+}
+
+blockquote {
+    display: block;
+    background: #fff;
+    padding: 15px 20px 15px 45px;
+    margin: 0 0 20px;
+    position: relative;
+
+    /*Font*/
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #666;
+    text-align: justify;
+
+    /*Borders - (Optional)*/
+    border-left: 15px solid #facb03;
+    border-right: 2px solid #c76c0c;
+
+    /*Box Shadow - (Optional)*/
+    -moz-box-shadow: 2px 2px 15px #2c2e32;
+    -webkit-box-shadow: 2px 2px 15px #2c2e32;
+    box-shadow: 2px 2px 15px #2c2e32;
+}
+
+blockquote::before {
+    content: "\201C"; /*Unicode for Left Double Quote*/
+
+    /*Font*/
+    font-family: Georgia, serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #999;
+
+    /*Positioning*/
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+
+blockquote::after {
+    /*Reset to make sure*/
+    content: "";
+}
+
+blockquote a {
+    text-decoration: none;
+    background: #eee;
+    cursor: pointer;
+    padding: 0 3px;
+    color: #c76c0c;
+}
+
+blockquote a:hover {
+    color: #666;
+}
+
+blockquote em {
+    font-style: italic;
+}
+
+/* Tab bar */
+
+header {
+    border-right: 0 solid #2c2e32;
+    float: left;
+    box-shadow: 0 0 30px #2c2e32;
+    height: 100%;
+    margin: 0;
+    min-height: 600px;
+    width: 300px;
+}
+
+/* nav -- container */
+header div.nav-container {
+    background: #2c2e32 none repeat scroll 0 0;
+    height: 100%;
+    margin: 0;
+    min-height: 300px;
+    padding: 10px 0;
+    transition: all 0.3s linear 0s;
+    width: 300px;
+}
+
+header div.logo_image {
+    background: #2c2e32 none repeat scroll 0 0;
+    border-bottom: 1px solid #000;
+}
+
+header div.logo_image img.logo_img {
+    height: 48px;
+    padding: 5px 10px;
+    width: 130px;
+}
+
+header div.user_image {
+    padding: 15px 0 5px;
+    text-align: center;
+}
+
+header div.user_image img.user_image_img {
+    border-radius: 100px;
+    height: 165px;
+    width: 165px;
+}
+
+header div.user_image p.user_image_txt {
+    color: #2c2e32;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 10px;
+}
+
+header div.user_image p.user_image_email {
+    font-weight: 600;
+}
+
+header div.nav-container ul.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header div.nav-container ul.nav li {
+}
+
+header div.nav-container ul.nav li.active {
+    height: 50;
+    position: relative;
+    background: linear-gradient(#292929, #242424);
+}
+
+header div.nav-container ul.nav li a {
+    border-bottom: 1px solid black;
+    border-left: 5px solid transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #bbb;
+    display: block;
+    font-weight: bold;
+    height: 50px;
+    letter-spacing: 1px;
+    line-height: 50px;
+    padding-left: 60px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s linear 0s;
+    width: 235px;
+}
+
+header div.nav-container ul.nav li.active a {
+    color: #facb03;
+    border-left: 5px solid #facb03;
+    background-color: #1B1B1B;
+    outline: 0;
+}
+
+header div.nav-container ul.nav li:not(.active):hover {
+    color: #eee;
+    border-left: 5px solid #facb03;
+    background-color: #1B1B1B;
+}
+
+header div.nav-container ul.nav li a span.nav_icon {
+}
+
+header div.nav-container ul.nav li a span.nav_icon i {
+}
+
+header div.nav-container ul.nav li.active a span.nav_icon i {
+    top: 13px;
+    margin-top: 0;
+}
+
+header div.nav-container ul.nav li a span.nav_icon i {
+    margin-top: 13px;
+    font-size: 1.5em;
+    left: 20px;
+    position: absolute;
+    transition: all 0.3s linear 0s;
+}
+
+header div.nav-container ul.nav li a span.nav_icon i.fa.fa-microphone {
+    margin-left: 4px;
+}
+
+header div.nav-container div#copyright_tunedoor {
+    color: #fff;
+    font-size: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* End Tab bar */
+
+/* Start Content */
+
+section#content {
+    color: #2c2e32;
+    margin: 20px 0 0 40px;
+    max-width: 900px;
+    width: 100%;
+}
+
+section#content div#content_area {
+    margin: 0 auto;
+}
+
+.media-holder {
+    max-height: 600px;
+    height: 100%;
+
+    overflow-y: scroll;
+    /*border: 1px solid #efefef;*/
+}
+.media {
+    border-bottom: 2px solid #0f0f0f;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.media .play-button {
+    background-image: url("../images/music.jpg");
+    background-color: #efefef;
+    background-size: 50px 50px;
+    height: 50px;
+    width: 50px;
+}
+
+.media .gallery-button {
+    background-image: url("../images/gallery-ico.png");
+    background-size: 50px 50px;
+    /*background-color: #facb03;*/
+    background-color: #29defa;
+}
+
+.media .btn {
+    height: 50px;
+    width: 50px;
+}
+.media .red {
+    background-color: red;
+    color: snow;
+}
+.red-text {
+    color: orangered;
+    font-weight: bolder;
+}
+
+.song-service {
+    list-style: none;
+}
+
+.song-service .item-added{
+    color: #3d8b3d;
+}
+
+
+
+@media screen {
+    #player {
+        min-width: 350px;
+        width:95%;
+        max-width: 840px;
+        background-color: #BFBFBF;
+        position: fixed;
+        bottom: 0;
+        opacity: .91;
+    }
+    #modal-payer {
+        min-width: 350px;
+        width:100%;
+        background-color: #BFBFBF;
+        position: relative;
+        bottom: 0;
+        opacity: .91;
+    }
+}
+
+.inline-play-button .glyphicon-play-circle{
+    display: none;
+    left:25px;
+    top:-40px;
+}
+.inline-play-button:hover .glyphicon-play-circle{
+    display: block;
+}
+
+.eco-profile input {
+     width: 100%;
+}

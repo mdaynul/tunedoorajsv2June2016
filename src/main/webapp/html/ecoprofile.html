@@ -1,0 +1,64 @@
+<form ng-submit="ctrl.saveProfile()" class="eco-profile">
+
+    <fieldset class="form-group">
+        <input class="form-control" name="firstName" ng-model="ctrl.ecoEntity.firstName"
+               placeholder="Your First Name" required="" type="text" ng-maxlength="45">
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="middleName" ng-model="ctrl.ecoEntity.middleName"
+               placeholder="Your Middle Name" required="" type="text" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="lastName"  ng-model="ctrl.ecoEntity.lastName"
+               placeholder="Your Last Name" required="" type="text" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="address1" ng-model="ctrl.ecoEntity.address1"
+               placeholder="Your 1st Address" required="" type="text" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="address2" ng-model="ctrl.ecoEntity.address2"
+               placeholder="Your 2nd Address" required="" type="text" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="city" ng-model="ctrl.ecoEntity.city"
+               placeholder="Your city" type="text" required="" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="state" ng-model="ctrl.ecoEntity.state"
+               placeholder="Your State" type="text" required="" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="zipCode" ng-model="ctrl.ecoEntity.zipCode"
+               placeholder="Your zipCode" type="text" required="" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="country" ng-model="ctrl.ecoEntity.country"
+               placeholder="Your country" type="text" required="" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="phone" ng-model="ctrl.ecoEntity.phone"
+               placeholder="Your phone" type="text" >
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" name="alternatePhone" ng-model="ctrl.ecoEntity.alternatePhone"
+               placeholder="Your Alternate Phone" type="text" >
+    </fieldset>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox"> Terms and Condition
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save ECO Profile</button>
+</form>

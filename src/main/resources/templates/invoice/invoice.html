@@ -1,0 +1,68 @@
+<div class="col-md-12" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 th:text="| Payment settled ${transaction.getAmount()} ${transaction.getCurrencyIsoCode()} |">message</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"> </div>
+        <!--<div class="col-md-2"></div>-->
+        <div class="col-md-6 col-md-offset-2">
+            <strong>Receipt</strong>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div>Bill To</div>
+            <div th:if='${transaction.getPaymentInstrumentType().equalsIgnoreCase("credit_card")}'>
+                <div th:text="${transaction.getCreditCard().getCardholderName()}"></div>
+
+                    <span th:text="${transaction.getCreditCard().getCardType()}"></span>
+                    <span th:text="${transaction.getCreditCard().getLast4()}"></span>
+
+            </div>
+            <div th:if='${transaction.getPaymentInstrumentType().equalsIgnoreCase("paypal_account")}'>
+                <div th:text="${transaction.getPayPalDetails().getPayerFirstName()} ${transaction.getPayPalDetails().getPayerLastName()}"></div>
+                <div th:text="${transaction.getPayPalDetails().getPayerEmail()}"></div>
+                <div th:text="${transaction.getPayPalDetails().getPaymentId}"></div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div>
+                <div>Payment</div>
+                <div th:text="${transaction.getCreatedAt().toString()}"></div>
+            </div>
+            <div>
+                <div>Transaction ID</div>
+                <div th:text="${transaction.getId()}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">Purchased Service</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-md-6">Song details</th>
+            <th class="col-md-6">Service details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${transaction.getMusicTitle()}"></td>
+            <td>
+                <table class="table table-bordered">
+
+                    <tr th:each="service : ${transaction.getActiveServices()}">
+                        <td class="col-md-2" th:text="${service.getServiceName()}"></td>
+                        <td class="col-md-1"><span class="pull-right" th:text="${service.getSuggestedCost() +' '+ transaction.getCurrencyIsoCode()}"></span></td>
+                    </tr>
+                    <tr class="danger">
+                        <td class="col-md-2">Total</td>
+                        <td class="col-md-1"><span class="pull-right" th:text="${transaction.getAmount() +' '+ transaction.getCurrencyIsoCode() }"></span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

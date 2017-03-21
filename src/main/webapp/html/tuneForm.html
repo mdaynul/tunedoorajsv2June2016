@@ -1,0 +1,20 @@
+<form ng-submit="ctrl.ok()">
+
+    <div class="modal-header">
+        <h3 class="modal-title">Upload a song</h3>
+    </div>
+
+    <div class="modal-body">
+
+        <fieldset class="form-group">
+            <input class="form-control" name="tuneName" ng-model="ctrl.tuneName"
+                   placeholder="Tune Name" required="" type="text" ng-maxlength="45">
+        </fieldset>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Upload</button>
+        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Cancel</button>
+    </div>
+
+</form>

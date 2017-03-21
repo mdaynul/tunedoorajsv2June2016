@@ -1,0 +1,107 @@
+<div id="content_area">
+
+    <div>
+        <button class="btn btn-default" ng-click="ctrl.recordTune=false; ctrl.uploadFromFileSystem=true">Upload From File System</button>
+        <button class="btn btn-default" ng-click="ctrl.recordTune=true; ctrl.uploadFromFileSystem=false">Record A Music</button>
+    </div>
+
+    <div  ng-if="ctrl.uploadFromFileSystem">
+        <div class="recorder container" >
+            <input type="file" fileread="ctrl.recorded" accept="audio/*" />
+            <button ng-if="ctrl.recorded" ng-click="ctrl.open()">
+                Upload
+            </button>
+        </div>
+    </div>
+
+    <div id="Copyrighted_Songs"  ng-if="ctrl.recordTune">
+        <h2>Record Your Song :</h2>
+
+        <div id="Copyrighted_Songs_content">
+            <div class="recorder container">
+                <h2>Record</h2>
+
+                <ng-audio-recorder id="mainAudio" audio-model="ctrl.recorded" show-player="false" time-limit="40">
+                    <div ng-if="recorder.isAvailable">
+
+                        <div ng-if="recorder.status.isDenied === true" style="color: red;">
+                            You need to grant permission for this application to USE your microphone.
+                        </div>
+                        <button ng-click="recorder.startRecord()" type="button"
+                                ng-disabled="recorder.status.isDenied === true || recorder.status.isRecording">
+                            Start Record
+                        </button>
+                        <button ng-click="recorder.stopRecord()" type="button" ng-disabled="recorder.status.isRecording === false">
+                            Stop Record
+                        </button>
+
+                        <button ng-click="recorder.status.isPlaying ? recorder.playbackPause() : recorder.playbackResume()"
+                                type="button" ng-disabled="recorder.status.isRecording || !recorder.audioModel">
+                            {{recorder.status.isStopped || recorder.status.isPaused ? 'Play' : 'Pause'}}
+                        </button>
+
+                        <button ng-click="recorder.save()" ng-disabled="recorder.status.isRecording || !recorder.audioModel">
+                            Download
+                        </button>
+
+                        <!--<button ng-click="recorder.upload()">-->
+                            <!--Upload-->
+                        <!--</button>-->
+
+                        <div style="max-width: 600px">
+                            <div ng-show="recorder.status.isConverting">
+                                Please wait while your recording is processed.
+                            </div>
+
+                            <div ng-show="recorder.isHtml5 && recorder.status.isRecording">
+                                <ng-audio-recorder-analyzer></ng-audio-recorder-analyzer>
+                            </div>
+                            <br/>
+
+                            <div ng-show="!recorder.status.isRecording && recorder.audioModel">
+                                <ng-audio-recorder-wave-view wave-color="yellow" bar-color="red"></ng-audio-recorder-wave-view>
+                            </div>
+                        </div>
+
+                        <h2 style="font-family: sans-serif; text-align: center; width: 60px; border-radius: 20px;
+        border: solid 2px #333; padding: 20px 10px;" ng-if="recorder.status.isRecording">
+                            {{recorder.elapsedTime > 9 ? recorder.elapsedTime : ('0'+recorder.elapsedTime)}}
+                        </h2>
+
+
+                        <h2 style="font-family: sans-serif; text-align: center; border: solid 2px #333; padding: 20px 10px;"
+                            ng-if="recorder.status.isRecording">
+                            Remaining Time: {{recorder.timeLimit - recorder.elapsedTime}}
+                        </h2>
+                    </div>
+                    </ng-audio-recorder>
+
+
+                <button ng-click="ctrl.open()">
+                    Upload
+                </button>
+                <!--<p>Record monitor volume: <input type="range" max="1" step="0.1" value="0"-->
+                                                 <!--ng-change="ctrl.changeVolume(this.value)"/></p>-->
+
+                <!--<p>-->
+                    <!--<button class="btn btn-primary" ng-click="ctrl.startRecording(this);">Record</button>-->
+                    <!--<button class="btn btn-warning" ng-click="ctrl.stopRecording(this);" disabled>Stop</button>-->
+                <!--</p>-->
+                <!--<table id="recordingslist">-->
+                    <!--<tr>-->
+                        <!--<div id="waveform">-->
+                            <!--<wave style="display: block; position: relative; height: 128px; overflow-x: auto; overflow-y: hidden;">-->
+                                <!--<canvas height="128" width="0"-->
+                                        <!--style="position: absolute; z-index: 1; left: 0px; top: 0px; bottom: 0px; width: 0px;"></canvas>-->
+                                <!--<wave style="position: absolute; z-index: 2; left: 0px; top: 0px; bottom: 0px; overflow: hidden; width: 0px; display: block; box-sizing: border-box; border-right: 0px solid rgb(51, 51, 51);">-->
+                                    <!--<canvas style="width: 0px;" height="128" width="0"></canvas>-->
+                                <!--</wave>-->
+                            <!--</wave>-->
+                        <!--</div>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            </div>
+        </div>
+    </div>
+
+</div>

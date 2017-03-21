@@ -1,0 +1,69 @@
+<div class="col-md-10">
+    <h2>My Tune :</h2>
+    <div class="row">
+        <div class="col-md-12 media-holder">
+            <div class="media" ng-repeat="song in ctrl.songs">
+                <div class="media-left">
+                    <div music-player="play" add-song="song" class="inline-play-button">
+                        <img class="media-object" src="../images/music.jpg"
+                             width="64" height="64" alt="Card image cap"/>
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="media-heading">{{ song.title }}</h4>
+                        <p>{{ song.recordedDateTime }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <button class="btn btn-default gallery-button" href="#"
+                                    ng-click="ctrl.showGallery(song)"></button>
+                            <!--<button class="btn btn-default play-button" href="#"-->
+                                    <!--music-player="play" add-song="song"></button>-->
+                            <button class="btn btn-default red" href="#"
+                                    ng-click="$event.preventDefault(); ctrl.open(song)">Buy</button>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-info" play-all="ctrl.songs">Play all</button>
+
+    <div id="player">
+        <div class="col-md-12">
+            <sound-manager></sound-manager>
+            <div class="col-md-3">
+                <span prev-track="" class="glyphicon glyphicon-step-backward"></span>
+                <span play-music="" ng-if="isPlaying==false" class="glyphicon glyphicon-play"></span>
+                <span pause-music="" ng-if="isPlaying==true"  class="glyphicon glyphicon-pause"></span>
+                <span next-track="" class="glyphicon glyphicon-step-forward"></span>
+                <span stop-music="" class="glyphicon glyphicon-stop"></span>
+                <span repeat-music="" class="glyphicon glyphicon-repeat"></span>
+            </div>
+            <div class="col-md-6">
+                <span>{{ currentPlaying.title }}</span>
+                <span>{{ currentPlaying.artist }}</span>
+                <span>({{ currentPostion }} / {{ currentDuration }})</span>
+            </div>
+            <div class="col-md-3">
+                <span mute-music="" class="glyphicon glyphicon-volume-off"></span>
+                <span music-volume="" data-type="increase" class="glyphicon glyphicon-plus"></span>
+                <span music-volume="" data-type="decrease" class="glyphicon glyphicon-minus"></span>
+                <span>{{volume}}</span>
+                <!--<span>{{mute}}</span>-->
+
+            </div>
+            <div class="seekBase progress-striped progress" seek-track style="width:80%; height:6px;">
+                <span class="seekLoad progress-bar" ng-style="{width : ( progress + '%' ) }"></span>
+                <span class="glyphicon glyphicon-asterisk" style="color:red;font-size: 5pt;left: -4px;"></span>
+            </div>
+        </div>
+    </div>
+</div>
+

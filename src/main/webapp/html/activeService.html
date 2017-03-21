@@ -1,0 +1,30 @@
+
+<div class="modal-header">
+    <h3 class="modal-title">Active Service Profile</h3>
+</div>
+<div class="modal-body">
+    <table class="table table-striped">
+        <tr class="song-service" ng-repeat="item in ctrl.services" ng-click="ctrl.addOrRemoveItem(item)">
+            <td class="col-md-9">
+                <h4 class="media-heading">{{ item.serviceName }}</h4>
+                <p>{{ item.currency }}{{ item.suggestedCost }}</p>
+            </td>
+            <td class="col-md-3 item-added">
+                <i ng-if="item.isAdded" class="fa fa-2x fa-check-circle"></i>
+            </td>
+        </tr>
+        <tr class="danger">
+            <td class="col-md-4">
+                <span>Total</span>
+            </td>
+            <td class="col-md-3 col-md-offset-5">
+                <h5>{{ctrl.currency}}{{ctrl.getTotal()}}</h5>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="ctrl.addedServices.length===0" ng-click="ctrl.ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Cancel</button>
+</div>
